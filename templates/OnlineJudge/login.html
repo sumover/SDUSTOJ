@@ -29,6 +29,7 @@
                 </div>
                 <div class="card-body text-center">
                     <form class="form-horizontal" role="form" method="POST" action="/OnlineJudge/POSTlogin/">
+                        {% csrf_token %}
                         <input type="hidden" name="token">
                         <div class="form-group form-row">
                             <label class="col-form-label col-md-2" for="username">用户名</label>
@@ -63,7 +64,7 @@
 <script rel="script" src="../../static/OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.min.js" async defer></script>
 <script rel="script" src="../../static/OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js" async
         defer></script>
-<script rel="script" src="../../static/OnlineJudge/Javascript/loginJS.js" async defer></script>
+{#<script rel="script" src="../../static/OnlineJudge/Javascript/loginJS.js" async defer></script>#}
 
 </body>
 </html>

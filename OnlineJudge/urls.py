@@ -1,16 +1,17 @@
 from django.urls import path
-from .views import *
+from . import views
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('login/', toLoginPage, name='toLoginPage'),
-    path('POSTlogin/', loginParameterChecker, name='loginParameterChecker'),
-    path('courses/', userCourse, name='userCourse'),
-    path('<int:course_id>/course/', courseDetail, 'courseDetail'),
-    path('<int:course_id>/course/<int:contest_id>/contest/', contestDetail, name='contestDetail'),
-    path('<int:course_id>course/<int:contest_id>/contest/<int:problem_id>/problem/', problemDetail,
+    path('', views.index, name='index'),
+    path('login/', views.toLoginPage, name='toLoginPage'),
+    path('POSTlogin/', views.loginParameterChecker, name='loginParameterChecker'),
+    path('logout/', views.logout, name='logout'),
+    path('courses/', views.userCourse, name='userCourse'),
+    path('<int:course_id>/course/', views.courseDetail, 'courseDetail'),
+    path('<int:course_id>/course/<int:contest_id>/contest/', views.contestDetail, name='contestDetail'),
+    path('<int:course_id>course/<int:contest_id>/contest/<int:problem_id>/problem/', views.problemDetail,
          name='problemDetail'),
-    path('submit/<int:contest_id>/contest/<int:problem_id>/problem/', submit, name='submit'),
-    path('<int:contest_id>/status/', contestProblemStatus, name='contestProblemStatus'),
+    path('submit/<int:contest_id>/contest/<int:problem_id>/problem/', views.submit, name='submit'),
+    path('<int:contest_id>/status/', views.contestProblemStatus, name='contestProblemStatus'),
 
 ]

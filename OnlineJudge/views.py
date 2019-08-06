@@ -45,7 +45,7 @@ def checkUserLogin(func):
         try:
             request.session['loginUserId']
         except KeyError:
-            return HttpResponseRedirect(reverse(''))
+            return HttpResponseRedirect('/OnlineJudge/')
         else:
             return func(request, *args, **kwargs)
 
@@ -70,7 +70,7 @@ def addHeaderContext(func):
             except User.DoesNotExist:  # as we know, this check not very important
                 context['userNotExist'] = True
             else:  # so we add username and userNotExist = False into template
-                context['userName'] = User.objects.get(pk=userid).username
+                context['user'] = User.objects.get(pk=userid)
                 context['userNotExist'] = False
         else:  # if user not login, mark userNotLogin is True
             context['userNotLogin'] = True
@@ -101,12 +101,18 @@ def loginParameterChecker(request):
     try:
         user = User.objects.get(username=username, password=password)
     except User.DoesNotExist:
-        return render(request, '', {
+        return render(request, 'OnlineJudge/login.html', {
             'userNotExist': True
         })
     else:
         request.session['loginUserId'] = user.pk
-        return HttpResponseRedirect(reverse(''))
+        return HttpResponseRedirect("/OnlineJudge/")
+
+
+@checkWhetherLogin
+def logout(request):
+    del request.session['loginUserId']
+    return HttpResponseRedirect('/OnlineJudge/')
 
 
 @checkWhetherLogin
