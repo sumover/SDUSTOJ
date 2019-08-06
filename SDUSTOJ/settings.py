@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'OnlineJudge.apps.OnlinejudgeConfig',
 
 ]
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
