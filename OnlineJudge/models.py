@@ -220,9 +220,15 @@ class Problem(models.Model):
     problemDetail = models.BinaryField(max_length=10 * 1024 * 1024)
     testCases = models.ManyToManyField(to="TestCase")
     problemTags = models.ManyToManyField(to='Tag')
+    timeLimit = models.DecimalField(max_digits=32, decimal_places=9)
+    memoryLimit = models.IntegerField(default=128)
+    outputLimit = models.IntegerField(blank=True, default=4096)
 
     def __hash__(self):
         return self.id
+
+    def __str__(self):
+        return self.shortName
 
 
 class Tag(models.Model):
