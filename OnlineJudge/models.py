@@ -137,8 +137,12 @@ class Course(models.Model):
         else:
             return False
 
+    def __str__(self):
+        return self.courseName
+
 
 class Contest(models.Model):
+    contestName = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True)
     creator = models.ForeignKey(to='User', on_delete=models.DO_NOTHING)
     beginTime = models.DecimalField(max_digits=32, decimal_places=9)
@@ -174,6 +178,16 @@ class Contest(models.Model):
             return False
         else:
             return False
+
+    def getContestRankInCourse(self, course):
+        contests = course.contest_set.all()
+        index = 0
+        for contest in contests:
+            if contest.id == self.id:
+                return index
+            else:
+                index += 1
+        return index
 
     @staticmethod
     def getUNIXTimeStampFromDateTime(transferTime) -> decimal:
