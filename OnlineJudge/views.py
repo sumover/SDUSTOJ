@@ -84,15 +84,15 @@ def addHeaderContext(func):
 
 @addHeaderContext
 def index(request, context):
-    return render(request, '', context)
+    return render(request, 'OnlineJudge/index.html', context)
 
 
 @addHeaderContext
 def toLoginPage(request, context):
     if context['userNotLogin']:
-        return render(request, '', context)
+        return render(request, 'OnlineJudge/login.html', context)
     else:
-        return HttpResponseRedirect(reverse(''))
+        return HttpResponseRedirect(reverse('index'))
 
 
 def loginParameterChecker(request):

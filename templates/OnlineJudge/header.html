@@ -1,60 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="../../static/OnlineJudge/CSS/global.css">
-  <title>顶部导航栏</title>
+    <meta charset="UTF-8">
+    <meta content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="../../static/OnlineJudge/CSS/global.css">
+    <title>顶部导航栏</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light" role="navigation">
 
-  <!--  TODO 放OJ图标-->
-  <img src="img" alt="asdasd">
+    <!--  TODO 放OJ图标-->
+    <img src="../../static/OnlineJudge/img" alt="SDUSTOnlineJudge">
 
-  <!--  TODO 放SDUST OJ跳转链接-->
-  <a class="navbar-brand" href="#">SDUST OJ</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">主页<span class="sr-only">(current)</span></a>
-      </li>
-      <!--      TODO 权限为学生时-->
-      {% if user.userPermission > 10 %}
-      {% endif %}
-    </ul>
+    <!--  TODO 放SDUST OJ跳转链接-->
+    <a class="navbar-brand" href="#">SDUST OJ</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">主页<span class="sr-only">(current)</span></a>
+            </li>
 
-    <!--    以下为导航栏右边-->
+            {% if user.userPermission > 10 %}
+                <!--      TODO 权限为学生时-->
+            {% else %}
+                {#                TODO 权限为管理员时#}
 
-    <ul class="navbar-nav ml-auto">
-      <!--通过检测用户名是否为null判断是否登录-->
-      {% if username %}
-      <li class="nav-item ml-auto">
-        <!--        禁用链接，当span用-->
-        <a class="nav-link disabled" href="">{{ user.username }}</a>
-      </li>
-      <li class="nav-item ml-auto">
-        <!--        TODO 添加登出动作-->
-        <a class="nav-link" href="">登出</a>
-      </li>
-      {% else %}
-      <li class="nav-item ml-auto">
-        <!--        TODO 添加登录页面跳转链接-->
-        <a class="nav-link" href="">登录</a>
-      </li>
-      {% endif %}
-      <!--      登录后显示用户名-->
-    </ul>
+            {% endif %}
+        </ul>
 
-  </div>
+        <!--    以下为导航栏右边-->
+
+        <ul class="navbar-nav ml-auto">
+            <!--通过检测用户名是否为null判断是否登录-->
+            {% if userNotLogin %}
+                <li class="nav-item ml-auto">
+                    <!--        TODO 添加登录页面跳转链接-->
+                    <a class="nav-link" href="/OnlineJudge/login/">登录</a>
+                </li>
+            {% else %}
+                <li class="nav-item ml-auto">
+                    <!--        禁用链接，当span用-->
+                    <a class="nav-link disabled" href="">{{ user.username }}</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <!--        TODO 添加登出动作-->
+                    <a class="nav-link" href="">登出</a>
+                </li>
+            {% endif %}
+            <!--      登录后显示用户名-->
+        </ul>
+
+    </div>
 </nav>
 
 <script rel="script" src="../../static/OnlineJudge/lib/jquery-3.4.1/jquery-3.4.1.min.js" defer></script>
