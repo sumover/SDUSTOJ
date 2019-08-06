@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'OnlineJudge.apps.OnlinejudgeConfig',
+    'AJAXapi.apps.AjaxapiConfig',
 
 ]
 STATICFILES_DIRS = [
