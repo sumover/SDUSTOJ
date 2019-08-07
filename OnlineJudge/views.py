@@ -9,7 +9,7 @@ from .models import *
 def checkWhetherLogin(func):
     def view(request, *args, **kwargs):
         if request.session.get('loginUserId', False) is False:
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/OnlineJudge/")
         else:
             return func(request, *args, **kwargs)
 

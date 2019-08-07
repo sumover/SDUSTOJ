@@ -155,11 +155,14 @@ class Contest(models.Model):
     config = models.ForeignKey(ContestConfig, on_delete=models.DO_NOTHING)
     participateCourse = models.ManyToManyField(Course)
 
+    def __str__(self):
+        return self.contestName
+
     def getContestProblems(self):
         problems = self.contestproblems.all()
         return problems
 
-    def checkWhetherNowContestStatus(self):
+    def nowContestStatus(self):
         now = time.time()
         if now < self.beginTime:
             return -1
@@ -208,6 +211,10 @@ class Contest(models.Model):
             return datetime.datetime.fromtimestamp(transferTime)
         else:
             return datetime.datetime.fromtimestamp(float(transferTime))
+
+    @staticmethod
+    def getTimeStampDistanceByDate(day, hour, minute, second):
+        return day * 86400 + hour * 60 * 60 + minute * 60 + second
 
 
 class SubmissionStatus(Matter):
