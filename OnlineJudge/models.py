@@ -102,6 +102,7 @@ class Language(models.Model):
 class Submission(models.Model):
     submittime = models.DecimalField(max_digits=32, decimal_places=9)
     submitfile = models.BinaryField(max_length=128 * 1024)
+    submitContest = models.ForeignKey(to='Contest', on_delete=models.DO_NOTHING)
     prob = models.ForeignKey(to='Problem', on_delete=models.DO_NOTHING)
     lang = models.OneToOneField(to='Language', on_delete=models.DO_NOTHING)
     submitStudent = models.ForeignKey(to='Student', on_delete=models.DO_NOTHING)
@@ -137,8 +138,12 @@ class Course(models.Model):
         else:
             return False
 
+    def __str__(self):
+        return self.courseName
+
 
 class Contest(models.Model):
+    contestName = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True)
     creator = models.ForeignKey(to='User', on_delete=models.DO_NOTHING)
     beginTime = models.DecimalField(max_digits=32, decimal_places=9)
@@ -175,6 +180,20 @@ class Contest(models.Model):
         else:
             return False
 
+    def getContestRankInCourse(self, course):
+        contests = course.contest_set.all()
+        index = 0
+        for contest in contests:
+            if contest.id == self.id:
+                return index
+            else:
+                index += 1
+        return index
+
+    @staticmethod
+    def getNowUNIXTimeStamp():
+        return time.time()
+
     @staticmethod
     def getUNIXTimeStampFromDateTime(transferTime) -> decimal:
         if isinstance(transferTime, datetime.datetime):
@@ -206,9 +225,15 @@ class Problem(models.Model):
     problemDetail = models.BinaryField(max_length=10 * 1024 * 1024)
     testCases = models.ManyToManyField(to="TestCase")
     problemTags = models.ManyToManyField(to='Tag')
+    timeLimit = models.DecimalField(max_digits=32, decimal_places=9)
+    memoryLimit = models.IntegerField(default=128)
+    outputLimit = models.IntegerField(blank=True, default=4096)
 
     def __hash__(self):
         return self.id
+
+    def __str__(self):
+        return self.shortName
 
 
 class Tag(models.Model):

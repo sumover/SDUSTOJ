@@ -80,9 +80,11 @@ def addHeaderContext(func):
     return view
 
 
+###########################################
+
 @addHeaderContext
 def index(request, context):
-    return render(request, 'OnlineJudge/index.html', context)
+    return render(request, '', context)
 
 
 @addHeaderContext
@@ -112,4 +114,63 @@ def loginParameterChecker(request):
 def userCourse(request, context):
     student = User.objects.get(pk=request.session['loginUserId']).transferType()
     context['courses'] = student.course_set.all()
+    return render(request, '', context)
+
+
+@checkWhetherLogin
+@addHeaderContext
+def courseDetail(request, context, course_id):
+    student = User.objects.get(pk=request.session['loginUserId']).transferType()
+    context['contests'] = student.course_set.get(pk=course_id)
+    return render(request, '', context)
+
+
+@checkWhetherLogin
+@addHeaderContext
+def contestDetail(request, context, course_id, contest_id):
+    context['contestProblems'] = Contest.objects.get(contest_id)
+    return render(request, '', context)
+
+
+@checkWhetherLogin
+@addHeaderContext
+def problemDetail(request, context, course_id, contest_id, problem_id):
+    context['problem'] = Problem.objects.get(pk=problem_id)
+    return render(request, '', context)
+
+
+def submit(request, contest_id, problem_id):
+    source = request.POST['sources']
+    lang = request.POST['language']
+    submitStudent = User.objects.get(pk=request.session.get('loginUserId')).transferType()
+    submission = Submission(
+        submittime=Contest.getNowUNIXTimeStamp(),
+        submitfile=source,
+        prob=Problem.objects.get(pk=problem_id),
+        lang=lang,
+        submitStudent=submitStudent
+    )
+    submission.save()
+    status = SubmissionStatus(aimSubmission=submission, staus=-1)
+    status.save()
+    return HttpResponseRedirect(reverse(''))
+
+
+@checkWhetherLogin
+@addHeaderContext
+def contestProblemStatus(request, context, contest_id):
+    user = User.objects.get(pk=request.session.get('loginUserId')).transferType()
+    if user.getPermission() > 10:
+        context['submitStatus'] = [
+            status for status in SubmissionStatus.objects.all()
+            if (status.aimSubmission.submitStudent.id == user.id) and
+               (status.aimSubmission.submitContest.id == contest_id)
+        ]
+        pass
+    else:
+        context['submitStatus'] = [
+            status for status in SubmissionStatus.objects.all()
+            if status.aimSubmission.submitContest.id == contest_id
+        ]
+        pass
     return render(request, '', context)
