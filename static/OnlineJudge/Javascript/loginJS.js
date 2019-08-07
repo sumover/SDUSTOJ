@@ -1,3 +1,9 @@
+/**
+ * 
+ * @param usernameString
+ * @returns {string|null}
+ */
+
 //定义username长度为学号长度
 function checkUsername(usernameString)
 {

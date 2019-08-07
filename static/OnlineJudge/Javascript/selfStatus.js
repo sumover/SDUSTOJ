@@ -1,7 +1,7 @@
 /**
- * 目标页面：scoreboard.html
+ * 目标页面：selfStatus.html
  * 功能：1.获取当前网络时间
- *      2.5s执行一次ajax，刷新榜单
+ *      2.1s执行一次ajax，获取判题状态
  * @type {Element}
  */
 

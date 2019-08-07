@@ -13,10 +13,6 @@
     #problemListDiv{
       margin-top: 30px;
     }
-
-    th{
-      text-align: center;
-    }
   </style>
 </head>
 <body>
@@ -52,7 +48,7 @@
           <tbody>
             {% if contests %}
               <tr>
-                {% for contest in contests %}
+                {% for problem in problems %}
                   <td><a>{{ problem.id }}</a></td>
                   {#            TODO 增加题目超链接#}
                   <td><a href="">{{ problem.name }}</a></td>
