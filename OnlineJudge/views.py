@@ -120,7 +120,7 @@ def logout(request):
 def userCourse(request, context):
     student = User.objects.get(pk=request.session['loginUserId']).transferType()
     studentSquad = student.squad_set.first()
-    context['courses'] = studentSquad.course.all()
+    context['courses'] = studentSquad.courses.all()
     return render(request, 'OnlineJudge/courses.html', context)
 
 
