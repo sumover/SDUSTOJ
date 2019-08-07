@@ -5,7 +5,7 @@
   <meta content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!--  TODO 添加Problem title-->
-  <title>{{problem.}}-{{problem.name}}</title>
+  <title>{{ problem.No }}-{{ problem.name }}</title>
   <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
@@ -13,11 +13,16 @@
 
   <style>
     #URLList{
+      margin-top: 100px;
       font-size: 14px;
     }
 
-    #submitButtonRow{
-      margin-top: 15px;
+    #submitButtonDiv{
+      margin-top: 100px;
+    }
+
+    #limitDiv{
+      margin-top: 30px;
     }
 
     #limitDl{
@@ -26,37 +31,41 @@
       overflow: hidden;
     }
 
-    #questionSelectDiv{
+    #languageSelectDiv{
       margin-top: 20px;
     }
 
     #problemDiv{
       margin-top: 30px;
     }
+
+    fieldset{
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
 <!--TODO 添加header-->
-<!--{% include "header.html" %}-->
+{% include "OnlineJudge/header.html" %}
 
 <div class="container" id="problemDiv">
   <div class="row">
     <!--  左边栏-->
     <div class="col-md-2 container">
-      <div class="row">
+      <div class="row" id="submitButtonDiv">
         <div class="col-md-12">
           <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal">
             提交
           </button>
         </div>
       </div>
-      <div class="row" id="submitButtonRow">
+      <div class="row" id="limitDiv">
         <div class="col-md-12 text-center">
           <dl class="card" id="limitDl">
             <dt>时间限制</dt>
             <dd>3000 ms</dd>
             <dt>内存限制</dt>
-            <dd>131072 kB</dd>
+            <dd>12312312 kB</dd>
             <dt>OS</dt>
             <dd>Linux</dd>
           </dl>
@@ -64,13 +73,33 @@
       </div>
     </div>
     <!--    题目主体-->
-    <div class="col-md-8 container text-left">
-      <h1 class="text-center">A - Palindrome</h1>
+    <div class="col-md-8 text-left">
+      <h1 class="text-center">小希的迷宫</h1>
       <fieldset>
+        <legend><b>题目描述</b></legend>
+        {{ problem.description }}
+      </fieldset>
+      <fieldset>
+        <legend><b>输入</b></legend>
+        {{ problem.input }}
+      </fieldset>
+      <fieldset>
+        <legend><b>输出</b></legend>
+        {{ problem.output }}
+      </fieldset>
+      <fieldset>
+        <legend><b>样例输入</b></legend>
+        {{ problem. }}
+      </fieldset>
+      <fieldset>
+        <legend><b>样例输出</b></legend>
+        {{ problem. }}
       </fieldset>
     </div>
+    <!-- 右边栏 -->
     <div class="col-sm-1 container">
       <div class="list-group text-center" id="URLList">
+{#        TODO 增加链接#}
         <a href="#" class="list-group-item">作业</a>
         <a href="#" class="list-group-item active">问题</a>
         <a href="#" class="list-group-item">状态</a>
@@ -80,7 +109,8 @@
   </div>
 </div>
 <!--模态框-->
-<div class="modal fade in" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade in" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -91,24 +121,13 @@
       </div>
       <div class="container">
         <form action="" role="form">
-          <div class="form-group form-row" id="questionSelectDiv">
-            <label class="col-md-1 col-form-label">题目</label>
-            <div class="col-md-6">
-              <select class="form-control">
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
-                <option>D</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group form-row">
+          <div class="form-group form-row" id="languageSelectDiv">
             <label class="col-md-1 col-form-label">语言</label>
             <div class="col-md-6">
               <select class="form-control">
-                <option>C</option>
-                <option>C++</option>
-                <option>Java</option>
+                {% for language in langeages %}
+                <option>{{ language.name }}</option>
+                {% endfor %}
               </select>
             </div>
           </div>
