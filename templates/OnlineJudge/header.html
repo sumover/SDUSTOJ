@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="../../static/OnlineJudge/CSS/global.css">
+  <title>顶部导航栏</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light" role="navigation">
+
+  <!--  TODO 放OJ图标-->
+  <img src="img" alt="asdasd">
+
+  <!--  TODO 放SDUST OJ跳转链接-->
+  <a class="navbar-brand" href="#">SDUST OJ</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      {#    TODO active的修改#}
+
+      <li class="nav-item active">
+        {#        TODO 添加链接 #}
+        <a class="nav-link" href="">主页<span class="sr-only">(current)</span></a>
+      </li>
+      <!--       权限为学生时-->
+      {% if user.userPermission > 10 %}
+        {#        TODO 添加链接 #}
+        <li class="nav-item">
+          <a class="nav-link" href="">课程</a>
+        </li>
+        {#        权限为管理员时 #}
+      {% elif user.userPermission < 10 %}
+        {#        TODO 添加链接 #}
+        <li class="nav-item">
+          <a class="nav-link" href="">题库</a>
+        </li>
+        <li>
+          <a class="nav-link" href="">作业管理</a>
+        </li>
+        <li>
+          <a class="nav-link" href="">实验管理</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">课程管理</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">班级管理</a>
+        </li>
+{#        其他权限 #}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            其他
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+{#            TODO 添加链接 #}
+            <a class="dropdown-item" href=""></a>
+            <a class="dropdown-item" href=""></a>
+          </div>
+        </li>
+      {% endif %}
+    </ul>
+
+    <!--    以下为导航栏右边-->
+
+    <ul class="navbar-nav ml-auto">
+      <!--通过检测用户名是否为null判断是否登录-->
+      {% if username %}
+        <li class="nav-item ml-auto">
+          <!--        禁用链接，当span用-->
+          <a class="nav-link disabled" href="">{{ user.username }}</a>
+        </li>
+        <li class="nav-item ml-auto">
+          <!--        TODO 添加登出动作-->
+          <a class="nav-link" href="">登出</a>
+        </li>
+      {% else %}
+        <li class="nav-item ml-auto">
+          <!--        TODO 添加登录页面跳转链接-->
+          <a class="nav-link" href="">登录</a>
+        </li>
+      {% endif %}
+      <!--      登录后显示用户名-->
+    </ul>
+
+  </div>
+</nav>
+
+<script rel="script" src="../../static/OnlineJudge/lib/jquery-3.4.1/jquery-3.4.1.min.js" defer></script>
+<script rel="script" src="../../static/OnlineJudge/lib/popper.min.js" defer></script>
+<script rel="script" src="../../static/OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.min.js" defer></script>
+<script rel="script" src="../../static/OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js" defer></script>
+</body>
+</html>
