@@ -37,10 +37,10 @@
         <tr>
           {% for contest in contests %}
             <td>{{ contest.id }}</td>
-            <td>{{ contest.name }}</td>
+            <td>{{ contest.contestName }}</td>
             <td class="beginTimeTd">{{ contest.beginTime }}</td>
             <td class="endTimeTd">{{ contest.endTime }}</td>
-            <td class="statusTd">{{ contest.status }}</td>
+            <td class="statusTd">{{ contest.nowContestStatus }}</td>
           {% endfor %}
         </tr>
       {% else %}
