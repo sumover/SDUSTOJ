@@ -128,7 +128,7 @@ def userCourse(request, context):
 def courseDetail(request, context, course_id):
     student = User.objects.get(pk=request.session['loginUserId']).transferType()
     context['contests'] = student.course_set.get(pk=course_id)
-    return render(request, '', context)
+    return render(request, 'OnlineJudge/contests.html', context)
 
 
 @checkWhetherLogin
