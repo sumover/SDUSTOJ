@@ -14,25 +14,28 @@
 {% include "OnlineJudge/header.html" %}
 
 <div class="container">
+  <div class="text-center">
+    <h2>课程列表</h2>
+  </div>
   <table class="table table-striped table-light table-hover text-center">
     <thead>
       <th>名称</th>
     </thead>
     <tbody>
       {% if courses and courses.length != 0 %}
-      {% for course in courses %}
+        {% for course in courses %}
+          <tr>
+            <td>
+              {#            TODO 添加链接#}
+              <a href="">{{ course.name }}</a>
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
         <tr>
-          <td>
-{#            TODO 添加链接#}
-            <a href="">{{ course.name }}</a>
-          </td>
+          <td>暂无课程信息</td>
         </tr>
-      {% endfor %}
-    {% else %}
-    <tr>
-      <td>暂无课程信息</td>
-    </tr>
-    {% endif %}
+      {% endif %}
     </tbody>
   </table>
 </div>
