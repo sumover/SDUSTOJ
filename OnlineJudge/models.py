@@ -94,9 +94,6 @@ class Squad(Matter):
         else:
             return False
 
-    def __str__(self):
-        return self.subOrg.shortName + ":" + self.squadName
-
 
 class Language(models.Model):
     lang = models.CharField(max_length=20)

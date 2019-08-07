@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="../../static/OnlineJudge/CSS/global.css">
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/CSS/global.css" %}">
   <title>登录</title>
   <style>
     #loginDiv{
@@ -61,10 +62,12 @@
     </div>
   </div>
 </div>
-<script rel="script" src="../../static/OnlineJudge/lib/jquery-3.4.1/jquery-3.4.1.min.js" async defer></script>
-<script rel="script" src="../../static/OnlineJudge/lib/popper.min.js" async defer></script>
-<script rel="script" src="../../static/OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.min.js" async defer></script>
-<script rel="script" src="../../static/OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js" async defer></script>
-{#<script rel="script" src="../../static/OnlineJudge/Javascript/loginJS.js" async defer></script>#}
+
+{% load staticfiles %}
+<script rel="script" src="{% static "OnlineJudge/lib/jquery-3.4.1/jquery-3.4.1.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/lib/popper.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/Javascript/loginJS.js" %}" defer></script>
 </body>
 </html>
