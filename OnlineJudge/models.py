@@ -102,6 +102,7 @@ class Language(models.Model):
 class Submission(models.Model):
     submittime = models.DecimalField(max_digits=32, decimal_places=9)
     submitfile = models.BinaryField(max_length=128 * 1024)
+    submitContest = models.ForeignKey(to='Contest', on_delete=models.DO_NOTHING)
     prob = models.ForeignKey(to='Problem', on_delete=models.DO_NOTHING)
     lang = models.OneToOneField(to='Language', on_delete=models.DO_NOTHING)
     submitStudent = models.ForeignKey(to='Student', on_delete=models.DO_NOTHING)
@@ -188,6 +189,10 @@ class Contest(models.Model):
             else:
                 index += 1
         return index
+
+    @staticmethod
+    def getNowUNIXTimeStamp():
+        return time.time()
 
     @staticmethod
     def getUNIXTimeStampFromDateTime(transferTime) -> decimal:
