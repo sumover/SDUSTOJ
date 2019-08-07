@@ -128,7 +128,8 @@ def userCourse(request, context):
 @addHeaderContext
 def courseDetail(request, context, course_id):
     student = User.objects.get(pk=request.session['loginUserId']).transferType()
-    context['contests'] = student.course_set.get(pk=course_id)
+    course = student.squad_set.first().courses.get(pk=course_id)
+    context['contests'] = course.contest_set.all()
     return render(request, 'OnlineJudge/contests.html', context)
 
 
