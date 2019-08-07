@@ -119,8 +119,9 @@ def logout(request):
 @addHeaderContext
 def userCourse(request, context):
     student = User.objects.get(pk=request.session['loginUserId']).transferType()
-    context['courses'] = student.course_set.all()
-    return render(request, '', context)
+    studentSquad = student.squad_set.first()
+    context['courses'] = studentSquad.course.all()
+    return render(request, 'OnlineJudge/courses.html', context)
 
 
 @checkWhetherLogin
