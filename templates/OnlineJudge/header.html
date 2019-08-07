@@ -38,7 +38,7 @@
                     <a class="nav-link" href="/OnlineJudge/courses/">课程</a>
                 </li>
                 {#        权限为管理员时 #}
-            {% else %}
+            {% elif not userNotLogin %}
                 {#        TODO 添加链接 #}
                 <li class="nav-item">
                     <a class="nav-link" href="">题库</a>
