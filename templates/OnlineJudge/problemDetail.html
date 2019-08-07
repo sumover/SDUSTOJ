@@ -13,11 +13,16 @@
 
   <style>
     #URLList{
+      margin-top: 100px;
       font-size: 14px;
     }
 
-    #submitButtonRow{
-      margin-top: 15px;
+    #submitButtonDiv{
+      margin-top: 100px;
+    }
+
+    #limitDiv{
+      margin-top: 30px;
     }
 
     #limitDl{
@@ -33,6 +38,10 @@
     #problemDiv{
       margin-top: 30px;
     }
+
+    fieldset{
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
@@ -43,20 +52,20 @@
   <div class="row">
     <!--  左边栏-->
     <div class="col-md-2 container">
-      <div class="row">
+      <div class="row" id="submitButtonDiv">
         <div class="col-md-12">
           <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal">
             提交
           </button>
         </div>
       </div>
-      <div class="row" id="submitButtonRow">
+      <div class="row" id="limitDiv">
         <div class="col-md-12 text-center">
           <dl class="card" id="limitDl">
             <dt>时间限制</dt>
-            <dd>{{ problem.timeLimit }} ms</dd>
+            <dd>3000 ms</dd>
             <dt>内存限制</dt>
-            <dd>{{ problem.memoryLimit }} kB</dd>
+            <dd>12312312 kB</dd>
             <dt>OS</dt>
             <dd>Linux</dd>
           </dl>
@@ -65,14 +74,32 @@
     </div>
     <!--    题目主体-->
     <div class="col-md-8 text-left">
-      <h1 class="text-center">A - Palindrome</h1>
-      <fieldset style="border: 1px solid">
-
+      <h1 class="text-center">小希的迷宫</h1>
+      <fieldset>
+        <legend><b>题目描述</b></legend>
+        {{ problem.description }}
+      </fieldset>
+      <fieldset>
+        <legend><b>输入</b></legend>
+        {{ problem.input }}
+      </fieldset>
+      <fieldset>
+        <legend><b>输出</b></legend>
+        {{ problem.output }}
+      </fieldset>
+      <fieldset>
+        <legend><b>样例输入</b></legend>
+        {{ problem. }}
+      </fieldset>
+      <fieldset>
+        <legend><b>样例输出</b></legend>
+        {{ problem. }}
       </fieldset>
     </div>
     <!-- 右边栏 -->
     <div class="col-sm-1 container">
       <div class="list-group text-center" id="URLList">
+{#        TODO 增加链接#}
         <a href="#" class="list-group-item">作业</a>
         <a href="#" class="list-group-item active">问题</a>
         <a href="#" class="list-group-item">状态</a>
