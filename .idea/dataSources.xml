@@ -18,7 +18,7 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:E:\Program\SDUSTOJ\db.sqlite3</jdbc-url>
       <driver-properties>
-        <property name="enable_load_extension" value="true" /
+        <property name="enable_load_extension" value="true" />
       </driver-properties>
     </data-source>
   </component>
