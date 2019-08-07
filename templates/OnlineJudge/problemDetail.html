@@ -64,11 +64,13 @@
       </div>
     </div>
     <!--    题目主体-->
-    <div class="col-md-8 container text-left">
+    <div class="col-md-8 text-left">
       <h1 class="text-center">A - Palindrome</h1>
-      <fieldset>
+      <fieldset style="border: 1px solid">
+
       </fieldset>
     </div>
+    <!-- 右边栏 -->
     <div class="col-sm-1 container">
       <div class="list-group text-center" id="URLList">
         <a href="#" class="list-group-item">作业</a>
@@ -96,9 +98,9 @@
             <label class="col-md-1 col-form-label">语言</label>
             <div class="col-md-6">
               <select class="form-control">
-                <option>C</option>
-                <option>C++</option>
-                <option>Java</option>
+                {% for language in langeages %}
+                <option>{{ language.name }}</option>
+                {% endfor %}
               </select>
             </div>
           </div>
