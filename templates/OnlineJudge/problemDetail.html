@@ -5,7 +5,7 @@
   <meta content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!--  TODO 添加Problem title-->
-  <title>{{problem.}}-{{problem.name}}</title>
+  <title>{{ problem.No }}-{{ problem.name }}</title>
   <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
@@ -26,7 +26,7 @@
       overflow: hidden;
     }
 
-    #questionSelectDiv{
+    #languageSelectDiv{
       margin-top: 20px;
     }
 
@@ -54,7 +54,7 @@
         <div class="col-md-12 text-center">
           <dl class="card" id="limitDl">
             <dt>时间限制</dt>
-            <dd>{{ problem.timeLimit | }} ms</dd>
+            <dd>{{ problem.timeLimit }} ms</dd>
             <dt>内存限制</dt>
             <dd>{{ problem.memoryLimit }} kB</dd>
             <dt>OS</dt>
@@ -80,7 +80,8 @@
   </div>
 </div>
 <!--模态框-->
-<div class="modal fade in" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade in" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -91,18 +92,7 @@
       </div>
       <div class="container">
         <form action="" role="form">
-          <div class="form-group form-row" id="questionSelectDiv">
-            <label class="col-md-1 col-form-label">题目</label>
-            <div class="col-md-6">
-              <select class="form-control">
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
-                <option>D</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group form-row">
+          <div class="form-group form-row" id="languageSelectDiv">
             <label class="col-md-1 col-form-label">语言</label>
             <div class="col-md-6">
               <select class="form-control">
