@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!--  TODO 添加Problem title-->
+  <title>{{ rank }}-{{ problem.problemName }}</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/CSS/global.css" %}">
+
+  <style>
+    #URLList{
+      margin-top: 100px;
+      font-size: 14px;
+    }
+
+    #submitButtonDiv{
+      margin-top: 100px;
+    }
+
+    #limitDiv{
+      margin-top: 30px;
+    }
+
+    #limitDl{
+      font-size: 14px;
+      padding: 5px 0;
+      overflow: hidden;
+    }
+
+    #languageSelectDiv{
+      margin-top: 20px;
+    }
+
+    #problemDiv{
+      margin-top: 30px;
+    }
+
+    fieldset{
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+<!--TODO 添加header-->
+{% include "OnlineJudge/header.html" %}
+
+<div class="container" id="problemDiv">
+  <div class="row">
+    <!--  左边栏-->
+    <div class="col-md-2 container">
+      <div class="row" id="submitButtonDiv">
+        <div class="col-md-12">
+          <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal">
+            提交
+          </button>
+        </div>
+      </div>
+      <div class="row" id="limitDiv">
+        <div class="col-md-12 text-center">
+          <dl class="card" id="limitDl">
+            <dt>时间限制</dt>
+            <dd>3000 ms</dd>
+            <dt>内存限制</dt>
+            <dd>12312312 kB</dd>
+            <dt>OS</dt>
+            <dd>Linux</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <!--    题目主体-->
+    <div class="col-md-8 text-left">
+      <h1 class="text-center">{{ problem.problemName }}</h1>
+      <article>
+        {{ problem.problemDetail }}
+      </article>
+    </div>
+    <!-- 右边栏 -->
+    <div class="col-sm-1 container">
+      <div class="list-group text-center" id="URLList">
+{#        TODO 增加链接#}
+        <a href="#" class="list-group-item">作业</a>
+        <a href="#" class="list-group-item active">问题</a>
+        <a href="#" class="list-group-item">状态</a>
+        <a href="#" class="list-group-item">排名</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--模态框-->
+<div class="modal fade in" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">提交</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container">
+        <form method="post" action="/OnlineJudge/submit/{{ contest_id }}/contest/{{ problem_id }}/problem/" role="form">
+        {% csrf_token %}
+          <div class="form-group form-row" id="languageSelectDiv">
+            <label class="col-md-1 col-form-label">语言</label>
+            <div class="col-md-6">
+              <select class="form-control" name="language">
+                {% for language in languages %}
+                <option value="{{ language.id }}">{{ language.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-row">
+            <label class="col-md-1 col-form-label" for="codeTextarea">代码</label>
+            <div class="col-md-11">
+              <textarea class="form-control" id="codeTextarea" rows="10" placeholder="在这里填写你的代码" name="sources"></textarea>
+            </div>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">提交</button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% load staticfiles %}
+<script rel="script" src="{% static "OnlineJudge/lib/jquery-3.4.1/jquery-3.4.1.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/lib/popper.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/Javascript/problemDetailJS.js" %}" defer></script>
+</body>
+</html>
