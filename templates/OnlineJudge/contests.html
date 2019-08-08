@@ -36,7 +36,8 @@
         <tr>
           {% for contest in contests %}
             <td>{{ contest.id }}</td>
-            <td>{{ contest.contestName }}</td>
+            {#            TODO 添加链接#}
+            <td><a href="">{{ contest.contestName }}</a></td>
             <td class="beginTimeTd">{{ contest.beginTime }}</td>
             <td class="endTimeTd">{{ contest.endTime }}</td>
             <td class="statusTd">{{ contest.nowContestStatus }}</td>
