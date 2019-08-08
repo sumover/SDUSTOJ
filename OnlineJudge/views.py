@@ -11,7 +11,8 @@ def checkWhetherLogin(func):
         if request.session.get('loginUserId', False) is False:
             return HttpResponseRedirect("/OnlineJudge/")
         else:
-            return func(request, *args, **kwargs)
+            response = func(request, *args, **kwargs)
+            return response
 
     return view
 
@@ -40,18 +41,6 @@ def checkWhetherContestExist(func):
 """
 
 
-def checkUserLogin(func):
-    def view(request, *args, **kwargs):
-        try:
-            request.session['loginUserId']
-        except KeyError:
-            return HttpResponseRedirect(reverse('index/'))
-        else:
-            return func(request, *args, **kwargs)
-
-    return view
-
-
 def addHeaderContext(func):
     """
     TODO the func must have this argument: request, context
@@ -74,7 +63,8 @@ def addHeaderContext(func):
                 context['userNotExist'] = False
         else:  # if user not login, mark userNotLogin is True
             context['userNotLogin'] = True
-        return func(request, context, *args, **kwargs)
+        response = func(request, context, *args, **kwargs)
+        return response
 
     return view
 
@@ -119,8 +109,9 @@ def logout(request):
 @addHeaderContext
 def userCourse(request, context):
     student = User.objects.get(pk=request.session['loginUserId']).transferType()
-    studentSquad = student.squad_set.first()
-    context['courses'] = studentSquad.courses.all()
+    if len(student.squad_set.all()) != 0:
+        studentSquad = student.squad_set.first()
+        context['courses'] = studentSquad.courses.all()
     return render(request, 'OnlineJudge/courses.html', context)
 
 
@@ -137,7 +128,8 @@ def courseDetail(request, context, course_id):
 @checkWhetherLogin
 @addHeaderContext
 def contestDetail(request, context, course_id, contest_id):
-    context['contestProblems'] = Contest.objects.get(contest_id)
+    context['contest'] = Contest.objects.get(pk=contest_id)
+
     return render(request, 'OnlineJudge/contestDetail.html', context)
 
 

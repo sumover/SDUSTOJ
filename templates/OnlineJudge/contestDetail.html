@@ -47,7 +47,7 @@
             <th>问题名称</th>
           </thead>
           <tbody>
-            {% if contests %}
+            {% if contest.nowContestStatus == 0 %}
               <tr>
                 {% for problem in problems %}
                   <td><a>{{ problem.id }}</a></td>
