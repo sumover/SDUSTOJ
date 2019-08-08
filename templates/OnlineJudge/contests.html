@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static "OnlineJudge/CSS/global.css" %}">
   <title>{{ contests.contestName }}</title>
 </head>
-<body>
+<body id="myBody">
 {% include "OnlineJudge/header.html" %}
 
 <div class="container">
@@ -33,16 +33,16 @@
     </thead>
     <tbody>
       {% if contests %}
-        <tr>
-          {% for contest in contests %}
+        {% for contest in contests %}
+          <tr>
             <td>{{ contest.id }}</td>
             {#            TODO 添加链接#}
             <td><a href="">{{ contest.contestName }}</a></td>
             <td class="beginTimeTd">{{ contest.beginTime }}</td>
             <td class="endTimeTd">{{ contest.endTime }}</td>
             <td class="statusTd">{{ contest.nowContestStatus }}</td>
-          {% endfor %}
-        </tr>
+          </tr>
+        {% endfor %}
       {% else %}
         <tr>
           <td colspan="5">暂无作业信息</td>
