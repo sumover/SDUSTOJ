@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="OnlineJudge/CSS/global.css">
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/CSS/global.css" %}">
   <title>{{ contest.name }}</title>
   <style>
     #problemListDiv{
@@ -18,7 +19,7 @@
 <body>
 {% include "OnlineJudge/header.html" %}
 
-<div class="container-fluid" id="problemListDiv">
+<div class="container" id="problemListDiv">
   <label id="statusCodeLabel" hidden>{{ status }}</label>
   <div class="container">
     <div class="row">

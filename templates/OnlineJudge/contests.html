@@ -9,10 +9,9 @@
   <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css" %}">
   <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css" %}">
   <link rel="stylesheet" href="{% static "OnlineJudge/CSS/global.css" %}">
-  <title>作业</title>
+  <title>{{ contests.contestName }}</title>
 </head>
 <body>
-<!--TODO 添加header-->
 {% include "OnlineJudge/header.html" %}
 
 <div class="container">
