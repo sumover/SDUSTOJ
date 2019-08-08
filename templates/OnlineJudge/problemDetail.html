@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!--  TODO 添加Problem title-->
   <title>{{ problem.No }}-{{ problem.name }}</title>
-  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../../static/OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="../../static/OnlineJudge/CSS/global.css">
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css" %}">
+  <link rel="stylesheet" href="{% static "OnlineJudge/CSS/global.css" %}">
 
   <style>
     #URLList{
@@ -74,27 +75,10 @@
     </div>
     <!--    题目主体-->
     <div class="col-md-8 text-left">
-      <h1 class="text-center">小希的迷宫</h1>
-      <fieldset>
-        <legend><b>题目描述</b></legend>
-        {{ problem.description }}
-      </fieldset>
-      <fieldset>
-        <legend><b>输入</b></legend>
-        {{ problem.input }}
-      </fieldset>
-      <fieldset>
-        <legend><b>输出</b></legend>
-        {{ problem.output }}
-      </fieldset>
-      <fieldset>
-        <legend><b>样例输入</b></legend>
-        {{ problem. }}
-      </fieldset>
-      <fieldset>
-        <legend><b>样例输出</b></legend>
-        {{ problem. }}
-      </fieldset>
+      <h1 class="text-center">{{ problem.problemName }}</h1>
+      <article>
+        {{ problem.problemDetail }}
+      </article>
     </div>
     <!-- 右边栏 -->
     <div class="col-sm-1 container">
@@ -147,10 +131,11 @@
   </div>
 </div>
 
-<script rel="script" src="../../static/OnlineJudge/lib/jquery-3.4.1/jquery-3.4.1.min.js" defer></script>
-<script rel="script" src="../../static/OnlineJudge/lib/popper.min.js" defer></script>
-<script rel="script" src="../../static/OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js" defer></script>
-<script rel="script" src="../../static/OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.min.js" defer></script>
-<script rel="script" src="../../static/OnlineJudge/Javascript/problemDetailJS.js" defer></script>
+{% load staticfiles %}
+<script rel="script" src="{% static "OnlineJudge/lib/jquery-3.4.1/jquery-3.4.1.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/lib/popper.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/lib/bootstrap-4.3.1/js/bootstrap.min.js" %}" defer></script>
+<script rel="script" src="{% static "OnlineJudge/Javascript/problemDetailJS.js" %}" defer></script>
 </body>
 </html>
