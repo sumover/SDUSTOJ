@@ -31,6 +31,16 @@ def checkWhetherContestExist(func):
     return view
 
 
+def checkContestRun(func):
+    def view(request, course_id, contest_id, *args, **kwargs):
+        if Contest.objects.get(pk=contest_id).nowContestStatus() != 0:
+            return HttpResponseRedirect('/OnlineJudge/%d/course/' % course_id)
+        else:
+            return func(request, course_id, contest_id, *args, **kwargs)
+
+    return view
+
+
 """
 1. 权限问题
     通常来讲, Administrator 可以查看任意界面, 所以这里的问题只有Student
@@ -125,6 +135,7 @@ def courseDetail(request, context, course_id):
     return render(request, 'OnlineJudge/contests.html', context)
 
 
+@checkContestRun
 @checkWhetherLogin
 @addHeaderContext
 def contestDetail(request, context, course_id, contest_id):
@@ -133,6 +144,7 @@ def contestDetail(request, context, course_id, contest_id):
     return render(request, 'OnlineJudge/contestDetail.html', context)
 
 
+@checkContestRun
 @checkWhetherLogin
 @addHeaderContext
 def problemDetail(request, context, course_id, contest_id, problem_id):
@@ -144,6 +156,7 @@ def problemDetail(request, context, course_id, contest_id, problem_id):
     return render(request, 'OnlineJudge/problemDetail.html', context)
 
 
+@checkContestRun
 def submit(request, contest_id, problem_id):
     source = request.POST['sources']
     lang_id = int(request.POST['language'])
@@ -162,6 +175,7 @@ def submit(request, contest_id, problem_id):
     return HttpResponseRedirect('/OnlineJudge/%d/status/' % contest_id)
 
 
+@checkContestRun
 @checkWhetherLogin
 @addHeaderContext
 def contestProblemStatus(request, context, contest_id):
