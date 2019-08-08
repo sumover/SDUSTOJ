@@ -130,6 +130,7 @@ def courseDetail(request, context, course_id):
     student = User.objects.get(pk=request.session['loginUserId']).transferType()
     course = student.squad_set.first().courses.get(pk=course_id)
     context['contests'] = course.contest_set.all()
+    context['course_id'] = course_id
     return render(request, 'OnlineJudge/contests.html', context)
 
 
@@ -137,7 +138,7 @@ def courseDetail(request, context, course_id):
 @addHeaderContext
 def contestDetail(request, context, course_id, contest_id):
     context['contestProblems'] = Contest.objects.get(contest_id)
-    return render(request, '', context)
+    return render(request, 'OnlineJudge/contestDetail.html', context)
 
 
 @checkWhetherLogin
@@ -156,7 +157,8 @@ def submit(request, contest_id, problem_id):
         submitfile=source,
         prob=Problem.objects.get(pk=problem_id),
         lang=lang,
-        submitStudent=submitStudent
+        submitStudent=submitStudent,
+        submitContest=Contest.objects.get(pk=contest_id)
     )
     submission.save()
     status = SubmissionStatus(aimSubmission=submission, staus=-1)

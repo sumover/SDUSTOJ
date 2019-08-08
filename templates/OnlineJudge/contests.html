@@ -37,7 +37,7 @@
           <tr>
             <td>{{ contest.id }}</td>
             {#            TODO 添加链接#}
-            <td><a href="">{{ contest.contestName }}</a></td>
+            <td>{% if contest.nowContestStatus == 0 %}<a href="{{ contest.id }}/contest/">{% else %}<a href="#">{% endif %}{{ contest.contestName }}</a></td>
             <td class="beginTimeTd">{{ contest.beginTime }}</td>
             <td class="endTimeTd">{{ contest.endTime }}</td>
             <td class="statusTd">{{ contest.nowContestStatus }}</td>

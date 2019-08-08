@@ -21,7 +21,7 @@ class User(models.Model):
         return 0
 
     def __str__(self):
-        return "%s : %s" % (self.pk, self.username)
+        return "%s : %s" % (self.pk, self.nickname)
 
     def transferType(self):
         try:
