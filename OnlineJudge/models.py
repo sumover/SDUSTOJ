@@ -13,6 +13,7 @@ class Organization(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=20)
+    nickname = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
     create_date = models.DateField(auto_now_add=True)
 
@@ -36,7 +37,6 @@ class User(models.Model):
 
 
 class Student(User):
-    nickname = models.CharField(max_length=20)
     creator = models.ForeignKey(to='Administrator', on_delete=models.DO_NOTHING)
 
     def checkWhetherStudentInSquad(self, squad):
