@@ -136,8 +136,10 @@ def contestDetail(request, context, course_id, contest_id):
 @checkWhetherLogin
 @addHeaderContext
 def problemDetail(request, context, course_id, contest_id, problem_id):
-    context['problem'] = Problem.objects.get(pk=problem_id)
-    return render(request, '', context)
+    problem = context['problem'] = Problem.objects.get(pk=problem_id)
+    context['languages'] = Language.objects.all()
+    context['rank'] = problem.getProblemRankInContest(Contest.objects.get(pk=contest_id))
+    return render(request, 'OnlineJudge/problemDetail.html', context)
 
 
 def submit(request, contest_id, problem_id):

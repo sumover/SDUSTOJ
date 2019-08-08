@@ -98,6 +98,12 @@ class Squad(Matter):
 class Language(models.Model):
     lang = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.lang
+
+    def name(self):
+        return self.lang
+
 
 class Submission(models.Model):
     submittime = models.DecimalField(max_digits=32, decimal_places=9)
@@ -241,6 +247,14 @@ class Problem(models.Model):
 
     def __str__(self):
         return self.shortName
+
+    def getProblemRankInContest(self, contest):
+        index = 0
+        for n in contest.contestproblems.all():
+            if n.id == self.id:
+                return index
+            else:
+                index += 1
 
 
 class Tag(models.Model):

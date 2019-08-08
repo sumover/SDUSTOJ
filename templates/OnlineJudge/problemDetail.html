@@ -5,7 +5,7 @@
   <meta content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!--  TODO 添加Problem title-->
-  <title>{{ problem.No }}-{{ problem.name }}</title>
+  <title>{{ rank }}-{{ problem.problemName }}</title>
   {% load staticfiles %}
   <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap.min.css" %}">
   <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css" %}">
@@ -105,11 +105,12 @@
       </div>
       <div class="container">
         <form action="" role="form">
+        {% csrf_token %}
           <div class="form-group form-row" id="languageSelectDiv">
             <label class="col-md-1 col-form-label">语言</label>
             <div class="col-md-6">
               <select class="form-control">
-                {% for language in langeages %}
+                {% for language in languages %}
                 <option>{{ language.name }}</option>
                 {% endfor %}
               </select>
