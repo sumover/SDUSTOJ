@@ -52,7 +52,7 @@
                 {% for problem in problems %}
                   <td><a>{{ problem.id }}</a></td>
                   {#            TODO 增加题目超链接#}
-                  <td><a href="">{{ problem.name }}</a></td>
+                  <td><a href="{{ problem.id }}/problem/">{{ problem.shortName }}</a></td>
                 {% endfor %}
               </tr>
             {% else %}

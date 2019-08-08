@@ -128,8 +128,8 @@ def courseDetail(request, context, course_id):
 @checkWhetherLogin
 @addHeaderContext
 def contestDetail(request, context, course_id, contest_id):
-    context['contest'] = Contest.objects.get(pk=contest_id)
-
+    contest = context['contest'] = Contest.objects.get(pk=contest_id)
+    context['problems'] = contest.contestproblems.all()
     return render(request, 'OnlineJudge/contestDetail.html', context)
 
 
