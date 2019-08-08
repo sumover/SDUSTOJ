@@ -23,7 +23,9 @@ function changeTime()
 //将时间戳转化为当前日期时间
 function timestampToTimeString(timestamp)
 {
-  let date = new Date(1470220594000);
+  let timestampFloat = parseFloat(timestamp);
+  timestampFloat = timestampFloat * 1000;
+  let date = new Date(timestampFloat);
   return date.toLocaleString('zh', {hour12:false});
 }
 

@@ -9,10 +9,9 @@
   <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css" %}">
   <link rel="stylesheet" href="{% static "OnlineJudge/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css" %}">
   <link rel="stylesheet" href="{% static "OnlineJudge/CSS/global.css" %}">
-  <title>作业</title>
+  <title>{{ contests.contestName }}</title>
 </head>
-<body>
-<!--TODO 添加header-->
+<body id="myBody">
 {% include "OnlineJudge/header.html" %}
 
 <div class="container">
@@ -34,15 +33,16 @@
     </thead>
     <tbody>
       {% if contests %}
-        <tr>
-          {% for contest in contests %}
+        {% for contest in contests %}
+          <tr>
             <td>{{ contest.id }}</td>
-            <td>{{ contest.contestName }}</td>
+            {#            TODO 添加链接#}
+            <td><a href="">{{ contest.contestName }}</a></td>
             <td class="beginTimeTd">{{ contest.beginTime }}</td>
             <td class="endTimeTd">{{ contest.endTime }}</td>
             <td class="statusTd">{{ contest.nowContestStatus }}</td>
-          {% endfor %}
-        </tr>
+          </tr>
+        {% endfor %}
       {% else %}
         <tr>
           <td colspan="5">暂无作业信息</td>
