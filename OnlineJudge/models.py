@@ -107,10 +107,10 @@ class Language(models.Model):
 
 class Submission(models.Model):
     submittime = models.DecimalField(max_digits=32, decimal_places=9)
-    submitfile = models.BinaryField(max_length=128 * 1024)
+    submitfile = models.TextField(max_length=128 * 1024)
     submitContest = models.ForeignKey(to='Contest', on_delete=models.DO_NOTHING)
     prob = models.ForeignKey(to='Problem', on_delete=models.DO_NOTHING)
-    lang = models.OneToOneField(to='Language', on_delete=models.DO_NOTHING)
+    lang = models.ForeignKey(to='Language', on_delete=models.DO_NOTHING)
     submitStudent = models.ForeignKey(to='Student', on_delete=models.DO_NOTHING)
 
 
@@ -221,7 +221,7 @@ class Contest(models.Model):
 
 
 class SubmissionStatus(Matter):
-    aimSubmission = models.OneToOneField(to='Submission', on_delete=models.CASCADE)
+    aimSubmission = models.ForeignKey(to='Submission', on_delete=models.CASCADE)
     status = models.IntegerField()  # -1 ,0 ,1
     result = models.CharField(max_length=20, blank=True)
     judgingMessage = models.CharField(max_length=10000, blank=True)

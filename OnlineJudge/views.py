@@ -139,25 +139,27 @@ def problemDetail(request, context, course_id, contest_id, problem_id):
     problem = context['problem'] = Problem.objects.get(pk=problem_id)
     context['languages'] = Language.objects.all()
     context['rank'] = problem.getProblemRankInContest(Contest.objects.get(pk=contest_id))
+    context['contest_id'] = contest_id
+    context['problem_id'] = problem_id
     return render(request, 'OnlineJudge/problemDetail.html', context)
 
 
 def submit(request, contest_id, problem_id):
     source = request.POST['sources']
-    lang = request.POST['language']
+    lang_id = int(request.POST['language'])
     submitStudent = User.objects.get(pk=request.session.get('loginUserId')).transferType()
-    submission = Submission(
-        submittime=Contest.getNowUNIXTimeStamp(),
-        submitfile=source,
-        prob=Problem.objects.get(pk=problem_id),
-        lang=lang,
-        submitStudent=submitStudent,
-        submitContest=Contest.objects.get(pk=contest_id)
-    )
+    submission = Submission()
+    submission.submittime = Contest.getNowUNIXTimeStamp()
+    submission.submitfile = source
+    submission.submitContest = Contest.objects.get(pk=contest_id)
+    submission.prob = Problem.objects.get(pk=problem_id)
+    submission.lang = Language.objects.get(pk=lang_id)
+    submission.submitStudent = submitStudent
     submission.save()
-    status = SubmissionStatus(aimSubmission=submission, staus=-1)
+    status = SubmissionStatus(aimSubmission=submission, status=-1)
+    status.creator = submitStudent
     status.save()
-    return HttpResponseRedirect(reverse(''))
+    return HttpResponseRedirect('/OnlineJudge/%d/status/' % contest_id)
 
 
 @checkWhetherLogin
@@ -177,4 +179,4 @@ def contestProblemStatus(request, context, contest_id):
             if status.aimSubmission.submitContest.id == contest_id
         ]
         pass
-    return render(request, '', context)
+    return render(request, 'OnlineJudge/selfStatus.html', context)
